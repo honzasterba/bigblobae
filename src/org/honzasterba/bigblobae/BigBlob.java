@@ -44,7 +44,7 @@ public class BigBlob {
 	 * @param data
 	 *            data to be stored, cannot be null.
 	 */
-	public void setData(final byte[] data) {
+	public BigBlob(final byte[] data) {
 		int written = 0;
 		while (written < data.length) {
 			final int segmentLength = Math.min(FRAGMENT_LIMIT, data.length
