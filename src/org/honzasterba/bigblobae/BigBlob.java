@@ -13,9 +13,13 @@ package org.honzasterba.bigblobae;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Key;
 
 /**
  * A BigBlob is a container that allows to store unlimited amounts of data into
@@ -23,8 +27,12 @@ import javax.jdo.annotations.Persistent;
  * has limit of one megabyte per row. This class helps to work around that limit
  * by fragmenting data into more smaller rows.
  */
-@PersistenceCapable(identityType = IdentityType.DATASTORE)
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class BigBlob {
+
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
 
 	/**
 	 * Arbitrary constant that guarantees that any records created by this class

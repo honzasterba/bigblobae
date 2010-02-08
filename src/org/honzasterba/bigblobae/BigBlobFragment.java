@@ -10,18 +10,25 @@
  */
 package org.honzasterba.bigblobae;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.datastore.Key;
 
 /**
  * A piece of a BigBlob that fits into the storage limits
  */
-@PersistenceCapable(identityType=IdentityType.DATASTORE)
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class BigBlobFragment {
-	
+
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
+
 	/**
 	 * Actual data of this fragment
 	 */
@@ -29,8 +36,10 @@ public class BigBlobFragment {
 	private Blob data;
 
 	/**
-	 * @param byteData Actual data to store, cannot be null
-	 * @throws IllegalArgumentException in case byteData is null
+	 * @param byteData
+	 *            Actual data to store, cannot be null
+	 * @throws IllegalArgumentException
+	 *             in case byteData is null
 	 */
 	public BigBlobFragment(byte[] byteData) {
 		if (byteData == null) {
@@ -38,13 +47,12 @@ public class BigBlobFragment {
 		}
 		data = new Blob(byteData);
 	}
-	
+
 	/**
 	 * @return Data holder for this fragment
 	 */
 	public Blob getData() {
 		return data;
 	}
-	
-	
+
 }
