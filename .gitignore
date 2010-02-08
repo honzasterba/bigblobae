@@ -2,3 +2,6 @@
 .project
 .settings
 bin
+build
+dist
+build.properties
