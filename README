@@ -1,0 +1,48 @@
+bigblobae
+---------
+A smallish library for your big data files on Google AppEngine
+
+There is not really need for any special documentation, so here
+is how to use this thing:
+
+<code>
+package com.myapp;
+
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+import org.honzasterba.bigblobae.BigBlob;
+
+import com.google.appengine.api.datastore.Key;
+
+@PersistenceCapable(identityType=IdentityType.APPLICATION)
+public class MyBigPhotoOrFile {
+	
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
+	
+	@Persistent
+	private String name;
+
+	@Persistent
+	private BigBlob dataBlob;
+
+	public CacheRecord(String name, byte[] data) {
+		this.name = name;
+		dataBlob = new BigBlob(data);
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public byte[] getData() {
+		return dataBlob.getData();
+	}
+
+}
+</code>
