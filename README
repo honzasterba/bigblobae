@@ -5,7 +5,6 @@ A smallish library for your big data files on Google AppEngine
 There is not really need for any special documentation, so here
 is how to use this thing:
 
-<code>
 package com.myapp;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -45,4 +44,3 @@ public class MyBigPhotoOrFile {
 	}
 
 }
-</code>
