@@ -38,7 +38,7 @@ public class BigBlob {
 	 * Arbitrary constant that guarantees that any records created by this class
 	 * will not violate the AppEngine JDO store limits.
 	 */
-	public static final int FRAGMENT_LIMIT = 777;
+	public static final int FRAGMENT_LIMIT = 777 * 1024;
 
 	/*
 	 * This list gets serialized and then restored by the JDO store.
